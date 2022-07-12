@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
-  get 'diagnose/new'
-  get 'diagnose/show'
-  get 'zombies/show'
-  get 'zombies/index'
-  get 'homes/top'
+
+  root to: "homes#top"
+  
+  resources :zombies, only:[:show, :index]
+
+  get 'diagnose/new' => "diagnose#new"
+  get 'diagnose/show' => "diagnose#show"
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
