@@ -1,0 +1,16 @@
+<h1>ゾンビ追加</h1>
+
+ <div>
+    <%= form_with model: @zombie, url: zombies_path, local:true do |f| %>
+      <%= f.label :name, "タイトル" %>
+      <%= f.text_field :name, size: 30 %>
+      
+      <%= f.label :body, "内容説明" %>
+      <%= f.text_area :body %>
+      
+      <%= f.label :image_id, "タイトル" %>
+      <%= f.attachment_field :image_id %>
+      
+      <%= f.submit "この内容で追加する" %>
+    <% end %>
+  </div>

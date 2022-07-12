@@ -1,2 +1,10 @@
-<h1>Homes#top</h1>
-<p>Find me in app/views/homes/top.html.erb</p>
+<h1>ゾンビさがし</h1>
+
+<h4>ここはいろいろなゾンビを取り扱っています。<br>
+まずは診断からあなた好みのゾンビを探してみてね</h4>
+
+<%= link_to "診断する", diagnose_path %>
+<%= link_to "一覧から探す", zombies_path %>
+
+
+<%= link_to "ゾンビを追加", new_zombie_path %>

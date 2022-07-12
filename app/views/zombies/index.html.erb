@@ -1,2 +1,7 @@
-<h1>Zombies#index</h1>
-<p>Find me in app/views/zombies/index.html.erb</p>
+<h1>ゾンビ一覧</h1>
+
+<% @zombies.each do |zombie| %>
+  <%= zombie.name %>
+  <%= zombie.body %>
+  <%= image_tag zombie.image_id, size: '100x100' %>
+<% end %>
