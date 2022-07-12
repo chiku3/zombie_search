@@ -8,9 +8,16 @@
       <%= f.label :body, "内容説明" %>
       <%= f.text_area :body %>
       
-      <%= f.label :image_id, "タイトル" %>
-      <%= f.attachment_field :image_id %>
-      
+      <%= f.label :image, "画像" %>
+      <%= f.attachment_field :image %>
+   
+      <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :name) do |tag| %>
+        <%= tag.label class: 'form-check-label' do %>
+          <%= tag.check_box class: 'form-check-input' %>
+          <%= tag.text %>
+        <% end %>
+      <% end %>
+
       <%= f.submit "この内容で追加する" %>
     <% end %>
   </div>

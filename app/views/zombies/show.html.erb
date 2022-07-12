@@ -1,2 +1,16 @@
-<h1>Zombies#show</h1>
-<p>Find me in app/views/zombies/show.html.erb</p>
+<h1><%= @zombie.name %></h1>
+
+
+  <%= attachment_image_tag @zombie, :image, :fill, 200, 200, format: 'jpeg' %>
+  <%= @zombie.body %>
+
+  <% @zombie.tags.each do |tag| %>
+    <span><%= tag.name %></span>
+  <% end %>
+  
+<%= link_to "編集する", edit_zombie_path(@zombie) %>
+
+
+<%= link_to "削除する", zombie_path(@zombie), method: :delete %>
+
+

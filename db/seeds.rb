@@ -5,16 +5,6 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-
-
-# サンプルデータ
-  5.times do |n|
-    Zombie.create!(
-      name: "ゾンビ#{n + 1}",
-      body: "概要説明",
-      image_id: "no_image.jpg"
-    )
-  end
   
 # サンプルデータ
   5.times do |n|

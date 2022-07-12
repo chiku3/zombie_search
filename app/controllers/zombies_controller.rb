@@ -10,12 +10,17 @@ class ZombiesController < ApplicationController
   end
   
   def show
+    @zombie = Zombie.find(params[:id])
   end
   
   def edit
+    @zombie = Zombie.find(params[:id])
   end
   
-  def updated
+  def update
+    @zombie = Zombie.find(params[:id])
+    @zombie.update(zombie_params)
+    redirect_to zombie_path(@zombie)
   end
 
   def index
@@ -23,13 +28,16 @@ class ZombiesController < ApplicationController
   end
   
   def destroy
+    @zombie = Zombie.find(params[:id])
+    @zombie.destroy
+    redirect_to zombies_path
   end
   
   
   private
 
   def zombie_params
-    params.require(:zombie).permit(:name, :body, :image, :tag_ids[])
+    params.require(:zombie).permit(:name, :body, :image, tag_ids: [])
   end
 
 end
