@@ -1,1 +1,34 @@
 <h1>診断ページ</h1>
+
+<p>当てはまる方をクリックしてね</p>
+
+
+<%= form_with url: diagnose_index_path, method: :get, local: true do |f| %>
+
+  <div>
+    <p>ゾンビと何したい？</p>
+    <%= f.radio_button :q_01, 1 %><%= f.label :q_01_1, "ゾンビを鑑賞したい" %>
+    <%= f.radio_button :q_01, 2 %><%= f.label :q_01_2, "ゾンビと遊びたい" %>
+  </div>
+  
+  <div>
+    <p>どっちのゾンビが好き？</p>
+    <%= f.radio_button :q_02, 1 %><%= f.label :q_02_1, "怖いゾンビ" %>
+    <%= f.radio_button :q_02, 2%><%= f.label :q_02_2, "かわいいゾンビ" %>
+  </div>
+  
+  <div>
+    <p>ゾンビと何したい？</p>
+    <%= f.radio_button :q_03, 1 %><%= f.label :q_03_1, "ゾンビと戦いたい" %>
+    <%= f.radio_button :q_03, 2 %><%= f.label :q_03_2, "ゾンビと仲良くなりたい" %>
+  </div>
+  
+  <div>
+    <p>ゾンビとの付き合い方は？</p>
+    <%= f.radio_button :q_04, 1 %><%= f.label :q_04_1, "サクッと" %>
+    <%= f.radio_button :q_04, 2 %><%= f.label :q_04_2, "べったり" %>
+  </div>
+  
+  
+<%= f.submit "診断結果へ" %>
+<% end %>

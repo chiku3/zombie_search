@@ -40,4 +40,7 @@ class ZombiesController < ApplicationController
     params.require(:zombie).permit(:name, :body, :image, tag_ids: [])
   end
 
+  def tag_params
+    params.require(:tag).permit(:name, zombie_ids: [])
+  end
 end
