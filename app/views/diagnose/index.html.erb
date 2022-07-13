@@ -1,6 +1,26 @@
 <h1>アナタにおすすめのゾンビコンテンツ</h1>
 
+<%= @total_s %><br>
+
+<% @zombies_1.each do |zombie| %>
+  <%= zombie.id %>
+      <% zombie.tags.each do |tag| %>
+          <%= tag.name %>
+      <% end %><br>
+<% end %><br>
+
+<% @zombies_2.each do |zombie| %>
+  <%= zombie.id %>
+      <% zombie.tags.each do |tag| %>
+          <%= tag.name %>
+      <% end %><br>
+<% end %><br>
+
 <% @zombies.each do |zombie| %>
-  <%= zombie.name %>
+  <%= zombie.id %>
+      <% zombie.tags.each do |tag| %>
+          <%= tag.name %>
+      <% end %><br>
 <% end %>
+
 

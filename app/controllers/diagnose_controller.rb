@@ -3,20 +3,27 @@ class DiagnoseController < ApplicationController
   end
 
   def index
-    @zombies = Zombie.includes(:tags).where(tags: {name: "ゲーム"})
+    # @zombies = Zombie.includes(:tags).where(tags: {name: "映画"}).or(Zombie.includes(:tags).where(tags: {name: "ドラマ"}))
 
-    if params[:p_01] == "1"
-      zombie_1 = Zombie.where("(tag.name = ?) OR (tag.name = ?)", "映画", "ドラマ")
-    else
-      zombie_1 = Zombie.where("(tag.name = ?) OR (tag.name = ?)", "ゲーム", "スマホアプリ")
+    if params[:q_1] == 'a'
+      @zombies_1 = Zombie.includes(:tags).where(tags: {name: "映画"}).or(Zombie.includes(:tags).where(tags: {name: "ドラマ"}))
+    elsif params[:q_1] == 'b'
+      @zombies_1 = Zombie.includes(:tags).where(tags: {name: "ゲーム"}).or(Zombie.includes(:tags).where(tags: {name: "スマホアプリ"}))
     end
 
-    if params[:p_02] == "1"
-      @zombie_2 = zombie_1.where("(tag.name = ?) OR (tag.name = ?)", "こわい", "ホラー")
-    else
-      @zombie_2 = zombie_1.where("(tag.name = ?) OR (tag.name = ?)", "かわいい", "恋愛")
+    if params[:q_2] == 'a'
+      @zombies_2 = Zombie.includes(:tags).where(tags: {name: "こわい"}).or(Zombie.includes(:tags).where(tags: {name: "ホラー"}))
+    elsif params[:q_2] == 'b'
+      @zombies_2 = Zombie.includes(:tags).where(tags: {name: "かわいい"}).or(Zombie.includes(:tags).where(tags: {name: "恋愛"}))
     end
 
+    s1 = @zombies_1.ids.uniq
+    s2 = @zombies_2.ids.uniq
+    total = s1.push(s2)
+    total.flatten!
+    @total_s = total.select{ |e| total.count(e) == 2 }.uniq
+    @zombies = Zombie.where id: @total_s
+    
 
 
     # zombies = Zombie.all
