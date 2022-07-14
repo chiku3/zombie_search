@@ -1,8 +1,10 @@
 <h1>ゾンビ一覧</h1>
 
-<% @zombies.each do |zombie| %>
-  <%= link_to zombie.name, zombie_path(zombie) %>
-  <%= zombie.body %>
-  <%= attachment_image_tag zombie, :image, :fill, 200, 200, format: 'jpeg' %>
-  <br>
-<% end %>
+  <% if @zombies.present? %>
+    <% @zombies.each do |zombie| %>
+      <%= link_to zombie.name, zombie_path(zombie) %>
+      <%= zombie.body %>
+      <%= attachment_image_tag zombie, :image, :fill, 200, 200, format: 'jpeg' %>
+      <br>
+    <% end %>
+  <% end %>

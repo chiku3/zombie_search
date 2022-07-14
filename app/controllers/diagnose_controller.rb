@@ -40,7 +40,7 @@ class DiagnoseController < ApplicationController
     total = s1 << s2 << s3 << s4
     total.flatten!
     #「重複回数＝質問の数」のidを取得
-    total_s = total.select{ |e| total.count(e) == 4 }.uniq
+    total_s = total.select{ |e| total.count(e) == 4}.uniq
     @zombies = Zombie.where id: total_s
 
   end

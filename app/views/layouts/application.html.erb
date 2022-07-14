@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <script src="https://kit.fontawesome.com/3e46d09fe1.js" crossorigin="anonymous"></script>
+    
     <title>ZombieSearch</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -10,6 +13,38 @@
   </head>
 
   <body>
+      <header>
+      <nav class="navbar navbar-expand-md" style="background-color: green;">
+
+      <h4><%= link_to "ゾンビさがし",root_path, class:"nabvar-brand text-light m-4" %></h4>
+      
+      <div class="search_form">
+        <%= form_with url: search_path, method: :get, local: true do |f| %>
+          <%= f.text_field :keyword, value: @keyword %>
+          <%= f.submit "検索" %>
+        <% end %>
+      </div>
+
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav ml-auto">
+
+            <li class="nav-item ml-auto mr-3"><i class="fas fa-home text-light"></i><%= link_to"診断から探す", diagnose_path,class:"text-light" %></li>
+            <li class="nav-item ml-auto mr-3"><p>カテゴリから探す</p></li>
+            <li class="nav-item ml-auto mr-3"><i class="far fa-question-circle text-light"></i><%= link_to "すべて", zombies_path,class:"text-light" %></li>
+            <li class="nav-item ml-auto mr-3"><i class="fas fa-door-open text-light"></i><%= link_to "ドラマ", zombies_path(tag_name: "ドラマ"),class:"text-light" %></li>
+            <li class="nav-item ml-auto mr-3"><i class="fas fa-sign-in-alt text-light"></i><%= link_to "アニメ", zombies_path(tag_name: "アニメ"),class:"text-light" %></li>
+            <li class="nav-item ml-auto mr-3"><i class="far fa-question-circle text-light"></i><%= link_to "ゲーム", zombies_path(tag_name: "ゲーム"),class:"text-light" %></li>
+
+        </ul>
+       </div>
+
+      </nav>
+    </header>
+    
     <%= yield %>
 
   </body>

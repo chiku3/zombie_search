@@ -4,16 +4,17 @@
 まずは診断からあなた好みのゾンビを探してみてね</h4>
 
 <%= link_to "診断する", diagnose_path %>
+
 <div>
   <p>カテゴリから探す</p>
-</div>
-
-<%#= link_to "映画", ({controller: "zombies", action: "index", tag: {name: "映画"}}, {class: zombies}) do %>
-
+<%= link_to "すべて", zombies_path %>
 <%= link_to "映画", zombies_path(tag_name: "映画") %>
 <%= link_to "ドラマ", zombies_path(tag_name: "ドラマ") %>
 <%= link_to "アニメ", zombies_path(tag_name: "アニメ") %>
 <%= link_to "ゲーム", zombies_path(tag_name: "ゲーム") %>
 <%= link_to "アプリ", zombies_path(tag_name: "スマホアプリ") %>
+</div>
+
+
 
 <%= link_to "ゾンビを追加", new_zombie_path %>
