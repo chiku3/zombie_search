@@ -26,9 +26,9 @@ class ZombiesController < ApplicationController
   def search
     @keyword = params[:keyword]
     zombie_1 = Zombie.where(["name like? OR body like?", "%#{@keyword}%", "%#{@keyword}%"])
-    s1 = zombie_1.ids.uniq
+      s1 = zombie_1.ids.uniq #検索で取得したゾンビdiを取得
     zombie_2 = Zombie.includes(:tags).where(tags: {name: "#{@keyword}"})
-    s2 = zombie_2.ids.uniq
+      s2 = zombie_2.ids.uniq  #検索で取得したゾンビdiを取得
 
     #検索から取得したゾンビidの配列を結合
     total = s1 << s2

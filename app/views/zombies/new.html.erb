@@ -13,8 +13,10 @@
    
       <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :name) do |tag| %>
         <%= tag.label class: 'form-check-label' do %>
+          <div class="pr-5">
           <%= tag.check_box class: 'form-check-input' %>
           <%= tag.text %>
+          </div>
         <% end %>
       <% end %>
 
