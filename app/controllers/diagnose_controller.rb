@@ -3,7 +3,6 @@ class DiagnoseController < ApplicationController
   end
 
   def index
-    # @zombies = Zombie.includes(:tags).where(tags: {name: "映画"}).or(Zombie.includes(:tags).where(tags: {name: "ドラマ"}))
 
     #ゾンビと何したい？
     if params[:q_1] == 'a' #ゾンビを鑑賞したい
