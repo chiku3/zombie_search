@@ -29,22 +29,19 @@ class ZombiesController < ApplicationController
     s1 = zombie_1.ids.uniq
     zombie_2 = Zombie.includes(:tags).where(tags: {name: "#{@keyword}"})
     s2 = zombie_2.ids.uniq
-    
+
     #検索から取得したゾンビidの配列を結合
     total = s1 << s2
     total.flatten!
     total_s = total.uniq
     @zombies = Zombie.where id: total_s
 
-
     render "index"
   end
 
   def index
     if params[:tag_name].present?
-      @zombies = Zombie.includes(:tags).where
-    # elsif params[:keyword].present?
-    #   @zombies = Zombie.includes(:tags).where(["name like? OR body like? OR tags.name like?", "%#{@keyword}%", "%#{@keyword}%", "%#{@keyword}%"])
+      @zombies = Zombie.includes(:tags).where(tags: {name: params[:tag_name]})
     else
       @zombies = Zombie.all
     end
