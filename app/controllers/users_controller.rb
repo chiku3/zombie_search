@@ -31,7 +31,7 @@ class UsersController < ApplicationController
 
   def destroy
     current_user.destroy
-    redirect_to sign_up_path
+    redirect_to signup_path
   end
 
 

@@ -9,7 +9,7 @@ class ZombiesController < ApplicationController
       redirect_to zombie_path(@zombie)
     else
       render 'new'
-    
+    end
   end
 
   def show

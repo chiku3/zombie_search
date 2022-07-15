@@ -7,8 +7,8 @@ Rails.application.routes.draw do
   delete 'logout' => 'sessions#destroy'
   
   resource :users, only: [:edit, :update]
-  get "sign_up" => "users#new"
-  post 'sign_up' => "users#create"
+  get "signup" => "users#new"
+  post 'signup' => "users#create"
   get "mypage" => "users#show", as: "mypage"
   delete "mypage" => "users#destroy", as: "unsubscribe"
   
