@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_action :require_login, only: [:show, :edit, :destroy]
-  
+
   def new
     @user = User.new
   end
@@ -16,6 +16,7 @@ class UsersController < ApplicationController
   end
 
   def show
+    @favorites = Favorite.where(user_id: current_user.id)
   end
 
   def edit

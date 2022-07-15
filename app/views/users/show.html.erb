@@ -1,16 +1,13 @@
 <h1>ユーザー情報</h1>
 
-
 <p>お名前：<%= current_user.name %></p>
 <p>メールアドレス：<%= current_user.email %></p>
 
-
+<p>お気に入り一覧</p>
+  <% @favorites.each do |fav| %>
+    <%= link_to fav.zombie.name, zombie_path(fav.zombie) %>
+  <% end %>
   
 <%= link_to "編集する", edit_users_path %>
-
-
 <%= link_to "退会する", unsubscribe_path, method: :delete, data: { confirm: '本当に退会しますか？' } %>
-
-
-
-<p><%= link_to 'ログアウト', logout_path, method: :delete %></p>
+<%= link_to 'ログアウト', logout_path, method: :delete %>
