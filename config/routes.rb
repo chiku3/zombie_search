@@ -6,11 +6,11 @@ Rails.application.routes.draw do
   post 'login' => 'sessions#create'
   delete 'logout' => 'sessions#destroy'
   
-  resources :users, only: [:edit, :update]
+  resource :users, only: [:edit, :update]
   get "sign_up" => "users#new"
   post 'sign_up' => "users#create"
-  get "mypage/:id" => "users#show", as: "mypage"
-  delete "mypage/:id" => "users#destroy", as: "unsubscribe"
+  get "mypage" => "users#show", as: "mypage"
+  delete "mypage" => "users#destroy", as: "unsubscribe"
   
 
   resources :zombies
