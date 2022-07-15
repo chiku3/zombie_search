@@ -5,8 +5,11 @@ class ZombiesController < ApplicationController
 
   def create
     @zombie = Zombie.new(zombie_params)
-    @zombie.save
-    redirect_to zombie_path(@zombie)
+    if @zombie.save
+      redirect_to zombie_path(@zombie)
+    else
+      render 'new'
+    
   end
 
   def show
