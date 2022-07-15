@@ -14,6 +14,7 @@ Rails.application.routes.draw do
 
   resources :zombies do
     resource :favorites, only: [:create, :destroy]
+    resource :reviews, only: [:create, :destroy]
   end
 
   get "search" => "zombies#search"

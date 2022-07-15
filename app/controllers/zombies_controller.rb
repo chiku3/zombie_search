@@ -14,6 +14,8 @@ class ZombiesController < ApplicationController
 
   def show
     @zombie = Zombie.find(params[:id])
+    @review = Review.where(zombie_id: @zombie.id).where(user_id: current_user.id)
+    @reviews = Review.where(zombie_id: @zombie)
   end
 
   def edit
@@ -60,7 +62,7 @@ class ZombiesController < ApplicationController
   private
 
   def zombie_params
-    params.require(:zombie).permit(:name, :body, :image, tag_ids: [])
+    params.require(:zombie).permit(:name, :body, :image, tag_ids: [], review: [:body])
   end
 
   def tag_params

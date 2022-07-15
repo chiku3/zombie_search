@@ -8,6 +8,13 @@
     <%= link_to fav.zombie.name, zombie_path(fav.zombie) %>
   <% end %>
   
+<p>レビュー投稿一覧</p>
+  <% @reviews.each do |review| %>
+    <%= link_to review.zombie.name, zombie_path(review.zombie) %>
+    <%= review.body %>
+    <%= link_to "レビューを削除", zombie_reviews_path(review.zombie), method: :delete %>
+  <% end %>
+  
 <%= link_to "編集する", edit_users_path %>
 <%= link_to "退会する", unsubscribe_path, method: :delete, data: { confirm: '本当に退会しますか？' } %>
 <%= link_to 'ログアウト', logout_path, method: :delete %>

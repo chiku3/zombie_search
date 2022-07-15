@@ -1,21 +1,54 @@
 <h1><%= @zombie.name %></h1>
 
+  <div>
+  <span>お気に入り登録数</span>
+    <%= @zombie.favorites.length %>
+  </div>
+
+  <div>
   <%= attachment_image_tag @zombie, :image, :fill, 200, 200, format: 'jpeg' %>
   <%= @zombie.body %>
 
   <% @zombie.tags.each do |tag| %>
     <span><%= link_to "#"+tag.name, zombies_path(tag_name: tag.name) %></span>
   <% end %>
-  
+  </div>
+
+  <div>
   <% if @zombie.favorited_by?(current_user) %>
     <%= link_to "お気に入りから削除", zombie_favorites_path(@zombie), method: :delete %>
   <% else %>
-    <%= link_to "お気に入り", zombie_favorites_path(@zombie), method: :post %>
+    <%= link_to "お気に入りに登録", zombie_favorites_path(@zombie), method: :post %>
   <% end %>
-  
+  </div>
+
+  <div>
+  <% if @zombie.reviewed_by?(current_user) %>
+    
+    
+  <% else %>
+      <%= form_with model: @review, url: zombie_reviews_path(@zombie),local: true do |f| %>
+
+        <%= f.label :body, "レビューを投稿する" %>
+        <%= f.text_area :body %>
+      <%= f.submit "保存" %>
+      <% end %>
+  <% end %>
+
+  </div>
+
+  <div>
+  <p>レビュー一覧</p>
+    <% @reviews.each do |review| %>
+      <%= review.user.name %>
+      <%= review.body %>
+    <% end %>
+  </div>
+
+<div>
 <%= link_to "編集する", edit_zombie_path(@zombie) %>
 
 
 <%= link_to "削除する", zombie_path(@zombie), method: :delete %>
-
+</div>
 
