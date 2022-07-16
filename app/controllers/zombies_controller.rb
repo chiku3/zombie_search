@@ -1,4 +1,6 @@
 class ZombiesController < ApplicationController
+  before_action :require_login, only: [:new, :edit, :destroy]
+
   def new
     @zombie = Zombie.new
   end
@@ -62,7 +64,7 @@ class ZombiesController < ApplicationController
   private
 
   def zombie_params
-    params.require(:zombie).permit(:name, :body, :image, tag_ids: [], review: [:body])
+    params.require(:zombie).permit(:user_id, :name, :body, :image, tag_ids: [], review: [:body])
   end
 
   def tag_params

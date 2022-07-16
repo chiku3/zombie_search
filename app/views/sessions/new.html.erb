@@ -1,14 +1,35 @@
-<h1>ログイン</h1>
+<div class="container">
 
-<%= form_with model: @session, local: true do |f| %>
-  <%= flash[:danger] %>
+  <div class="row d-flex justify-content-center align-items-center" style="height: 100px;">
+    <h1>ログイン</h1>
+  </div>
 
-  <%= f.label :email, 'メールアドレス' %>
-  <%= f.email_field :email %>
+  <div class="row d-flex flex-column justify-content-center align-items-center">
+    <%= form_with model: @session, local: true do |f| %>
+      <div class="text-danger">
+        <%= flash[:danger] %>
+      </div>
 
-  <%= f.label :password, 'パスワード' %>
-  <%= f.password_field :password %>
+      <table class="table table-borderless">
+        <tr>
+          <th><%= f.label :email, 'メールアドレス' %></th>
+          <td><%= f.email_field :email %></td>
+        </tr>
 
-  <%= f.submit 'ログイン' %>
-<% end %>
+        <tr>
+          <th><%= f.label :password, 'パスワード' %></th>
+          <td><%= f.password_field :password %></td>
+        </tr>
+      </table>
 
+      <div class="row d-flex justify-content-center align-items-center">
+      <%= f.submit 'ログイン', class:"btn btn-info" %>
+      </div>
+      
+      <div class="row d-flex justify-content-center align-items-center m-2">
+        <%= link_to"新規登録", signup_path,class:"btn btn-info"%>
+      </div>
+    <% end %>
+  </div>
+
+</div>

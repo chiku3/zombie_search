@@ -6,10 +6,10 @@ class UsersController < ApplicationController
   end
 
   def create
-    user = User.new(user_params)
-    if user.save
-      log_in(user)
-      redirect_to mypage_path(user)
+    @user = User.new(user_params)
+    if @user.save
+      log_in(@user)
+      redirect_to mypage_path(@user)
     else
       render 'new'
     end
@@ -18,6 +18,7 @@ class UsersController < ApplicationController
   def show
     @favorites = Favorite.where(user_id: current_user.id)
     @reviews = Review.where(user_id: current_user.id)
+    @zombies = Zombie.where(user_id: current_user.id)
   end
 
   def edit

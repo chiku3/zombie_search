@@ -1,37 +1,51 @@
-<h1>ユーザー登録</h1>
+<div class="container">
 
- <%= form_with model: @user, url: signup_path, local: true do |f| %>
-    <% if @user.errors.any? %>
-      <strong><%= @user.errors.count %>個のエラーがあります。</strong>
-        <ul>
-          <% @user.errors.full_messages.each do |msg| %>
-            <li><%= msg %></li>
+  <div class="row d-flex justify-content-center align-items-center" style="height: 100px;">
+    <h1>ユーザー登録</h1>
+  </div>
+    
+    
+  <div class="row d-flex flex-column justify-content-center align-items-center">
+     <%= form_with model: @user, url: signup_path, local: true do |f| %>
+     
+        <div class="d-flex flex-column justify-content-center align-items-center text-danger">
+          <% if @user.errors.any? %>
+            <strong><%= @user.errors.count %>個のエラーがあります。</strong>
+              <ul>
+                <% @user.errors.full_messages.each do |msg| %>
+                  <li><%= msg %></li>
+                <% end %>
+              </ul>
           <% end %>
-        </ul>
-      <% end %>
+        </div>
       
-    <div>
-    <%= f.label :name, 'ニックネーム' %>
-    <%= f.text_field :name %>
-    </div>
-    
-    <div>
-    <%= f.label :email, 'メールアドレス' %>
-    <%= f.email_field :email %>
-    </div>
-    
-    <div>
-    <%= f.label :password, 'パスワード（６文字以上）' %>
-    <%= f.password_field :password %>
-    </div>
-    
-    <div>
-    <%= f.label :password_confirmation, 'パスワード(確認)' %>
-    <%= f.password_field :password_confirmation %>
-    </div>
-    
-    <div>
-    <%= f.submit '登録' %>
-    </div>
-    
-<% end %>
+      <table class="table table-borderless">
+        <tr>
+          <th><%= f.label :name, 'ニックネーム' %></th>
+          <td><%= f.text_field :name %></td>
+        </tr>
+        
+        <tr>
+          <th><%= f.label :email, 'メールアドレス' %></th>
+          <td><%= f.email_field :email %></td>
+        </tr>
+
+        <tr>
+          <th><%= f.label :password, 'パスワード（６文字以上）' %></th>
+          <td><%= f.password_field :password %></td>
+        </tr>
+        
+        <tr>
+          <th><%= f.label :password_confirmation, 'パスワード(確認)' %></th>
+          <td><%= f.password_field :password_confirmation %></td>
+        </tr>
+      </table>    
+      
+      <div class="row d-flex justify-content-center align-items-center">
+        <%= f.submit '登録', class:"btn btn-info" %>
+      </div>
+        
+    <% end %>
+  </div>
+
+</div>

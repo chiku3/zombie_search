@@ -1,20 +1,102 @@
-<h1>ユーザー情報</h1>
+<div class="container">
 
-<p>お名前：<%= current_user.name %></p>
-<p>メールアドレス：<%= current_user.email %></p>
+  <div class="row d-flex justify-content-center align-items-center" style="height: 100px;">
+    <h1>ユーザー情報</h1>
+  </div>
 
-<p>お気に入り一覧</p>
-  <% @favorites.each do |fav| %>
-    <%= link_to fav.zombie.name, zombie_path(fav.zombie) %>
-  <% end %>
-  
-<p>レビュー投稿一覧</p>
-  <% @reviews.each do |review| %>
-    <%= link_to review.zombie.name, zombie_path(review.zombie) %>
-    <%= review.body %>
-    <%= link_to "レビューを削除", zombie_reviews_path(review.zombie), method: :delete %>
-  <% end %>
-  
-<%= link_to "編集する", edit_users_path %>
-<%= link_to "退会する", unsubscribe_path, method: :delete, data: { confirm: '本当に退会しますか？' } %>
-<%= link_to 'ログアウト', logout_path, method: :delete %>
+  <div class="row d-flex justify-content-center align-items-center" style="height: 100px;">
+    <div>
+      <table class="table table-borderless">
+        <tr>
+          <th>ニックネーム：</th>
+          <td><%= current_user.name %></td>
+
+          <th>メールアドレス：</th>
+          <td><%= current_user.email %></td>
+
+          <td><%= link_to "編 集", edit_users_path, class:"btn btn-outline-primary btn-sm" %></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4 d-flex flex-column justify-content-center align-items-center">
+      <div class="m-3">
+        <span>登録一覧</span>
+      </div>
+
+      <div>
+      <% if @zombies.present? %>
+        <table class="table table-sm">
+          <tr>
+            <th>タイトル</th>
+            <th>概  要</th>
+          </tr>
+
+          <% @zombies.each do |zombie| %>
+          <tr>
+            <td><%= link_to zombie.name, zombie_path(zombie), class:"text-dark" %></td>
+            <td><%= zombie.body %></td>
+          </tr>
+          <% end %>
+        </table>
+      <% else %>
+        <span>あなたの知っているゾンビコンテンツを登録することができます</span>
+      <% end %>
+      </div>
+      
+      <div>
+        <%= link_to "ゾンビ情報を登録", new_zombie_path, class:"btn btn-outline-info btn-sm m-3" %>
+      </div>
+    </div>
+
+    <div class="col-md-4 d-flex flex-column justify-content-center align-items-center">
+      <div class="m-3">
+        <span>お気に入り一覧</span>
+      </div>
+
+      <div>
+        <table class="table table-sm">
+          <tr>
+            <th>タイトル</th>
+            <th>概  要</th>
+          </tr>
+
+          <% @favorites.each do |fav| %>
+          <tr>
+            <td><%= link_to fav.zombie.name, zombie_path(fav.zombie), class:"text-dark" %></td>
+            <td><%= fav.zombie.body %></td>
+          </tr>
+          <% end %>
+        </table>
+      </div>
+    </div>
+
+
+    <div class="col-md-4 d-flex flex-column justify-content-center align-items-center">
+      <div class="m-3">
+        <span>レビュー投稿一覧</span>
+      </div>
+
+      <div>
+        <table class="table table-sm">
+          <tr>
+            <th>タイトル</th>
+            <th>レビュー内容</th>
+          </tr>
+
+          <% @reviews.each do |review| %>
+          <tr>
+            <td><%= link_to review.zombie.name, zombie_path(review.zombie), class:"text-dark" %></td>
+            <td><%= review.body %></td>
+            <td><%= link_to "削除", zombie_reviews_path(review.zombie), method: :delete,data: { confirm: '本当に削除しますか？' },class:"btn btn-sm btn-outline-danger" %></td>
+          </tr>
+          <% end %>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+</div>

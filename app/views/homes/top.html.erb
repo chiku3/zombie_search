@@ -1,20 +1,60 @@
-<h1>ゾンビさがし</h1>
+<div class="container">
 
-<h4>ここはいろいろなゾンビを取り扱っています。<br>
-まずは診断からあなた好みのゾンビを探してみてね</h4>
+  <div class="row d-flex justify-content-center align-items-center" style="height: 100px;">
+    <h1>ゾンビさがし</h1>
+  </div>
 
-<%= link_to "診断する", diagnose_path %>
+  <div class="row d-flex justify-content-center" style="height: 100px;">
+    <p>ここはいろいろなゾンビを取り扱っています<br>
+    まずは診断からあなた好みのゾンビを探してみましょう</p>
+  </div>
 
-<div>
-  <p>カテゴリから探す</p>
-<%= link_to "すべて", zombies_path %>
-<%= link_to "映画", zombies_path(tag_name: "映画") %>
-<%= link_to "ドラマ", zombies_path(tag_name: "ドラマ") %>
-<%= link_to "アニメ", zombies_path(tag_name: "アニメ") %>
-<%= link_to "ゲーム", zombies_path(tag_name: "ゲーム") %>
-<%= link_to "アプリ", zombies_path(tag_name: "スマホアプリ") %>
+  <div class="row d-flex justify-content-center align-items-center">
+    <div class="col-md-4 btn btn-info d-flex justify-content-center align-items-center"  style="height: 200px;">
+      <%= link_to "診断してみる", diagnose_path , class: "text-light"%>
+    </div>
+
+    <div class="col-md-1">
+    </div>
+
+    <div class="col-md-4 bg-info rounded d-flex justify-content-center" style="height: 200px;">
+      <div class="d-flex flex-column">
+        <div class="d-flex justify-content-center text-light m-4">
+          <span>カテゴリから探す</span>
+        </div>
+
+        <div class="d-flex flex-wrap align-items-center">
+          <%= link_to "すべて", zombies_path, class: "btn btn-light btn-sm m-1" %>
+            <%= link_to "映画", zombies_path(tag_name: "映画"), class: "btn btn-light btn-sm m-1" %>
+            <%= link_to "ドラマ", zombies_path(tag_name: "ドラマ"), class: "btn btn-light btn-sm m-1" %>
+            <%= link_to "アニメ", zombies_path(tag_name: "アニメ"), class: "btn btn-light btn-sm m-1" %>
+            <%= link_to "ゲーム", zombies_path(tag_name: "ゲーム"), class: "btn btn-light btn-sm m-1" %>
+            <%= link_to "アプリ", zombies_path(tag_name: "スマホアプリ"), class: "btn btn-light btn-sm m-1" %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <% if logged_in? %>
+    <div class="row d-flex justify-content-center align-items-center mt-5">
+      <%= link_to"ログアウト", logout_path, method: :delete,class:"btn btn-outline-info btn-sm" %>
+    </div>
+  <% else %>
+    <div class="row d-flex justify-content-center align-items-center mt-5">
+      <p>ユーザー登録をすると、ゾンビ情報の追加・レビュー投稿・<br>お気に入り機能が使えるようになります！</p>
+    </div>
+  
+    <div class="row d-flex justify-content-center align-items-center m-2">
+      <%= link_to"新規登録", signup_path,class:"btn btn-outline-info btn-sm"%>
+    </div>
+    
+    <div class="row d-flex justify-content-center align-items-center">
+      <%= link_to"ログイン", login_path,class:"btn btn-outline-info btn-sm" %>
+    </div>
+  <% end %>
+
+
+
+
+
 </div>
-
-
-
-<%= link_to "ゾンビを追加", new_zombie_path %>

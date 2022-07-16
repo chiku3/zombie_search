@@ -1,5 +1,5 @@
 class DiagnoseController < ApplicationController
-  def diagnose
+  def new
   end
 
   def index
