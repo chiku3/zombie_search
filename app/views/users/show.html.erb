@@ -23,31 +23,35 @@
   <div class="row">
     <div class="col-md-4 d-flex flex-column justify-content-center align-items-center">
       <div class="m-3">
-        <span>登録一覧</span>
+        <span>投稿一覧</span>
       </div>
 
       <div>
       <% if @zombies.present? %>
         <table class="table table-sm">
-          <tr>
-            <th>タイトル</th>
-            <th>概  要</th>
-          </tr>
+          <thead>
+            <tr>
+              <th>タイトル</th>
+              <th>概  要</th>
+            </tr>
+          </thead>
 
-          <% @zombies.each do |zombie| %>
-          <tr>
-            <td><%= link_to zombie.name, zombie_path(zombie), class:"text-dark" %></td>
-            <td><%= zombie.body %></td>
-          </tr>
-          <% end %>
+          <tbody>
+            <% @zombies.each do |zombie| %>
+            <tr>
+              <td><%= link_to zombie.name, zombie_path(zombie), class:"text-dark" %></td>
+              <td><%= zombie.body %></td>
+            </tr>
+            <% end %>
+          </tbody>
         </table>
       <% else %>
-        <span>あなたの知っているゾンビコンテンツを登録することができます</span>
+        <span>あなたの知っているゾンビコンテンツを投稿することができます</span>
       <% end %>
       </div>
       
       <div>
-        <%= link_to "ゾンビ情報を登録", new_zombie_path, class:"btn btn-outline-info btn-sm m-3" %>
+        <%= link_to "ゾンビを投稿", new_zombie_path, class:"btn btn-outline-info btn-sm m-3" %>
       </div>
     </div>
 
@@ -58,17 +62,21 @@
 
       <div>
         <table class="table table-sm">
-          <tr>
-            <th>タイトル</th>
-            <th>概  要</th>
-          </tr>
-
-          <% @favorites.each do |fav| %>
-          <tr>
-            <td><%= link_to fav.zombie.name, zombie_path(fav.zombie), class:"text-dark" %></td>
-            <td><%= fav.zombie.body %></td>
-          </tr>
-          <% end %>
+          <thead>
+            <tr>
+              <th>タイトル</th>
+              <th>概  要</th>
+            </tr>
+          </thead>
+          
+          <tbody>
+            <% @favorites.each do |fav| %>
+            <tr>
+              <td><%= link_to fav.zombie.name, zombie_path(fav.zombie), class:"text-dark" %></td>
+              <td><%= fav.zombie.body %></td>
+            </tr>
+            <% end %>
+          </tbody>
         </table>
       </div>
     </div>
@@ -81,18 +89,22 @@
 
       <div>
         <table class="table table-sm">
-          <tr>
-            <th>タイトル</th>
-            <th>レビュー内容</th>
-          </tr>
+          <thead>
+            <tr>
+              <th>タイトル</th>
+              <th>レビュー内容</th>
+            </tr>
+          </thead>
 
-          <% @reviews.each do |review| %>
-          <tr>
-            <td><%= link_to review.zombie.name, zombie_path(review.zombie), class:"text-dark" %></td>
-            <td><%= review.body %></td>
-            <td><%= link_to "削除", zombie_reviews_path(review.zombie), method: :delete,data: { confirm: '本当に削除しますか？' },class:"btn btn-sm btn-outline-danger" %></td>
-          </tr>
-          <% end %>
+          <tbody>
+            <% @reviews.each do |review| %>
+            <tr>
+              <td><%= link_to review.zombie.name, zombie_path(review.zombie), class:"text-dark" %></td>
+              <td><%= review.body %></td>
+              <td><%= link_to "削除", zombie_reviews_path(review.zombie), method: :delete,data: { confirm: '本当に削除しますか？' },class:"btn btn-sm btn-outline-danger" %></td>
+            </tr>
+            <% end %>
+          </tbody>
         </table>
       </div>
     </div>

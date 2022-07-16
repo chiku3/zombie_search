@@ -1,13 +1,40 @@
-<h1>ゾンビ一覧</h1>
+<div class="container">
+  <div class="row d-flex justify-content-center align-items-center">
+    <div class="col-md d-flex flex-wrap">
+      <% @tags.each do |tag| %>
+        <span><%= link_to "#"+tag.name, zombies_path(tag_name: tag.name), class:"btn btn-info btn-sm m-1" %></span>
+      <% end %>
+    </div>
+  </div>
+  
 
-  <% if @zombies.present? %>
-    <% @zombies.each do |zombie| %>
-      <%= link_to zombie.name, zombie_path(zombie) %>
-        <span>お気に入り</span>
-          (<%= zombie.favorites.length %>)
-        </div>
-      <%= zombie.body %>
-      <%= attachment_image_tag zombie, :image, :fill, 200, 200, format: 'jpeg' %>
-      <br>
-    <% end %>
-  <% end %>
+  <div class="row d-flex justify-content-center align-items-center" style="height: 100px;">
+    <h1>ゾンビ一覧</h1>
+  </div>
+
+  <div class="row d-flex justify-content-center align-items-center">
+    <div class="col-md-8">
+      <table class="table table-sm">
+        <thead>
+          <tr>
+            <th style="width: 25%"></th>
+            <th style="width: 25%">タイトル</th>
+            <th style="width: 50%">概　要</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @zombies.each do |zombie| %>
+            <tr>
+              <td><%= attachment_image_tag zombie, :image, :fill, 100, 100, format: 'jpeg' %><br>
+                  <span>お気に入り数(<%= zombie.favorites.length %>)</span></td>
+              <td><%= link_to zombie.name, zombie_path(zombie), class:"text-dark" %></td>
+              <td><%= zombie.body %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+</div>

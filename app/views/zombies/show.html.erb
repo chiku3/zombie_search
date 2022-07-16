@@ -1,54 +1,100 @@
-<h1><%= @zombie.name %></h1>
+<div class="container">
 
-  <div>
-  <span>お気に入り登録数</span>
-    <%= @zombie.favorites.length %>
+  <div class="row d-flex justify-content-center align-items-center" style="height: 100px;">
+    <h1><%= @zombie.name %></h1>
   </div>
 
-  <div>
-  <%= attachment_image_tag @zombie, :image, :fill, 200, 200, format: 'jpeg' %>
-  <%= @zombie.body %>
 
-  <% @zombie.tags.each do |tag| %>
-    <span><%= link_to "#"+tag.name, zombies_path(tag_name: tag.name) %></span>
-  <% end %>
-  </div>
 
-  <div>
-  <% if @zombie.favorited_by?(current_user) %>
-    <%= link_to "お気に入りから削除", zombie_favorites_path(@zombie), method: :delete %>
-  <% else %>
-    <%= link_to "お気に入りに登録", zombie_favorites_path(@zombie), method: :post %>
-  <% end %>
-  </div>
+  <div class="row d-flex justify-content-center">
+    <div class="col-md-5 d-flex flex-column justify-content-center">
+      <div>
+        <%= attachment_image_tag @zombie, :image, :fill, 200, 200, format: 'jpeg' %>
+      </div>
+      <div class="my-2">
+        <span>お気に入り登録数（<%= @zombie.favorites.length %>）</span>
+      </div>
 
-  <div>
-  <% if @zombie.reviewed_by?(current_user) %>
+      <div>
+        <% if @zombie.favorited_by?(current_user) %>
+          <%= link_to "お気に入り登録済★", zombie_favorites_path(@zombie), method: :delete, class:"text-dark" %>
+        <% else %>
+          <%= link_to "お気に入り登録☆", zombie_favorites_path(@zombie), method: :post, class:"text-dark" %>
+        <% end %>
+      </div>
+      
+      <div class="my-2">
+        <span>投稿者：<%= @zombie.user.name %></span>
+      </div>
+      
+      <div class="">
+        <% if @zombie.user_id == current_user.id %>
+          <div>
+          <%= link_to "編 集", edit_zombie_path(@zombie), class:"btn btn-outline-info btn-sm m-2" %>
     
-    
-  <% else %>
-      <%= form_with model: @review, url: zombie_reviews_path(@zombie),local: true do |f| %>
+          <%= link_to "削 除", zombie_path(@zombie), method: :delete,data: { confirm: '本当に削除しますか？' }, class:"btn btn-outline-danger btn-sm" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
 
-        <%= f.label :body, "レビューを投稿する" %>
-        <%= f.text_area :body %>
-      <%= f.submit "保存" %>
-      <% end %>
-  <% end %>
+    <div class="col-md-7 d-flex flex-column justify-content-start">
+      <div class="border rounded mb-3" style="height: 200px;">
+        <%= @zombie.body %>
+      </div>
 
+      <div>
+        <% @zombie.tags.each do |tag| %>
+          <span><%= link_to "#"+tag.name, zombies_path(tag_name: tag.name), class:"btn btn-info btn-sm m-1" %></span>
+        <% end %>
+      </div>
+    </div>
   </div>
 
-  <div>
-  <p>レビュー一覧</p>
-    <% @reviews.each do |review| %>
-      <%= review.user.name %>
-      <%= review.body %>
+  <div class="row d-flex flex-column justify-content-center align-items-center mt-5">
+    <% if @zombie.reviewed_by?(current_user) %>
+    <% else %>
+        <%= form_with model: @review, url: zombie_reviews_path(@zombie),local: true do |f| %>
+          <div class="row d-flex flex-column justify-content-center align-items-center">
+            <%= f.label :body, "レビューを投稿する" %>
+          </div>
+          <div class="row d-flex flex-column justify-content-center align-items-center">
+            <%= f.text_area :body,size: "50x7" %>
+          </div>
+          <div class="row d-flex flex-column justify-content-center align-items-center">
+          <%= f.submit "保存",data: { confirm: 'この内容で投稿しますか？' }, class:"btn btn-outline-info btn-sm my-2" %>
+          </div>
+        <% end %>
     <% end %>
   </div>
 
-<div>
-<%= link_to "編集する", edit_zombie_path(@zombie) %>
+  <div class="row d-flex justify-content-center align-items-center">
+    <div class="col-md-8">
+    
+      <div class="d-flex justify-content-center align-items-center">
+        <p>レビュー一覧</p>
+      </div>
+      
+      <table class="table table-sm">
+        <thead>
+          <tr>
+            <th style="width: 25%">投稿者</th>
+            <th style="width: 50%">内　容</th>
+            <th style="width: 25%">投稿日時</th>
+          </tr>
+        </thead>
+        
+        <tbody>
+          <% @reviews.each do |review| %>
+          <tr>
+            <td><%= review.user.name %></td>
+            <td><%= review.body %></td>
+            <td><%= review.created_at.to_s(:datetime_jp) %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
 
-
-<%= link_to "削除する", zombie_path(@zombie), method: :delete %>
 </div>
-

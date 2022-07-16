@@ -7,4 +7,11 @@ ja:
         name: ニックネーム
         email: メールアドレス
         password: パスワード
+    models:
+      zombie: ゾンビ
+    attributes:
+      zombie:
+        name: タイトル
+        body: 内容
+        tag: タグ
 

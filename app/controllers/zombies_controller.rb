@@ -47,6 +47,7 @@ class ZombiesController < ApplicationController
   end
 
   def index
+    @tags = Tag.all
     if params[:tag_name].present?
       @zombies = Zombie.includes(:tags).where(tags: {name: params[:tag_name]})
     else
