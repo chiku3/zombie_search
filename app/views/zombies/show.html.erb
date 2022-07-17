@@ -28,7 +28,7 @@
       </div>
       
       <div class="">
-        <% if @zombie.user_id == current_user.id %>
+        <% if logged_in? && @zombie.user_id == current_user.id %>
           <div>
           <%= link_to "編 集", edit_zombie_path(@zombie), class:"btn btn-outline-info btn-sm m-2" %>
     
@@ -52,19 +52,23 @@
   </div>
 
   <div class="row d-flex flex-column justify-content-center align-items-center mt-5">
-    <% if @zombie.reviewed_by?(current_user) %>
-    <% else %>
-        <%= form_with model: @review, url: zombie_reviews_path(@zombie),local: true do |f| %>
-          <div class="row d-flex flex-column justify-content-center align-items-center">
-            <%= f.label :body, "レビューを投稿する" %>
-          </div>
-          <div class="row d-flex flex-column justify-content-center align-items-center">
-            <%= f.text_area :body,size: "50x7" %>
-          </div>
-          <div class="row d-flex flex-column justify-content-center align-items-center">
-          <%= f.submit "保存",data: { confirm: 'この内容で投稿しますか？' }, class:"btn btn-outline-info btn-sm my-2" %>
-          </div>
-        <% end %>
+    <% if logged_in? %>
+      <% if @zombie.reviewed_by?(current_user) %>
+      <% else %>
+          <%= form_with model: @review, url: zombie_reviews_path(@zombie),local: true do |f| %>
+            <div class="row d-flex flex-column justify-content-center align-items-center">
+              <%= f.label :body, "レビューを投稿する" %>
+            </div>
+            <div class="row d-flex flex-column justify-content-center align-items-center">
+              <%= f.text_area :body,size: "50x7" %>
+            </div>
+            
+              <%= f.hidden_field :user_id, :value => current_user.id %> 
+            <div class="row d-flex flex-column justify-content-center align-items-center">
+            <%= f.submit "保存",data: { confirm: 'この内容で投稿しますか？' }, class:"btn btn-outline-info btn-sm my-2" %>
+            </div>
+          <% end %>
+      <% end %>
     <% end %>
   </div>
 

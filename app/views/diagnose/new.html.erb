@@ -1,34 +1,41 @@
-<h1>診断ページ</h1>
-
-<p>当てはまる方をクリックしてね</p>
-
-
-<%= form_with url: diagnose_index_path, method: :get, local: true do |f| %>
-
-  <div>
-    <p>ゾンビと何したい？</p>
-    <%= f.radio_button :q_1, "a" %><%= f.label :q_1_a, "ゾンビを鑑賞したい" %>
-    <%= f.radio_button :q_1, "b" %><%= f.label :q_1_b, "ゾンビと遊びたい" %>
+<div class="container">
+  <div class="row d-flex justify-content-center align-items-center" style="height: 100px;">
+    <h1>診断ページ</h1>
   </div>
-  
-  <div>
-    <p>どっちのゾンビが好き？</p>
-    <%= f.radio_button :q_2, "a" %><%= f.label :q_2_a, "怖いゾンビ" %>
-    <%= f.radio_button :q_2, "b" %><%= f.label :q_2_b, "かわいいゾンビ" %>
+
+  <div class="row d-flex flex-column justify-content-center align-items-center">
+    <%= form_with url: diagnose_index_path, method: :get, local: true do |f| %>
+
+    <table>
+      <th><strong>１.ゾンビと何したい？</strong></th>
+      <tr>
+        <td><%= f.radio_button :q_1, "a", checked: true %><%= f.label :q_1_a, "ゾンビを鑑賞したい" %></td>
+        <td><%= f.radio_button :q_1, "b" %><%= f.label :q_1_b, "ゾンビと遊びたい" %></td>
+      </tr>
+
+      <th><strong>２.どっちのゾンビが好き？</strong></th>
+      <tr>
+        <td><%= f.radio_button :q_2, "a", checked: true %><%= f.label :q_2_a, "怖いゾンビ" %></td>
+        <td><%= f.radio_button :q_2, "b" %><%= f.label :q_2_b, "かわいいゾンビ" %></td>
+      </tr>
+
+      <th><strong>３.ゾンビと何したい？</strong></th>
+      <tr>
+        <td><%= f.radio_button :q_3, "a", checked: true %><%= f.label :q_3_a, "ゾンビと戦いたい" %></td>
+        <td><%= f.radio_button :q_3, "b" %><%= f.label :q_3_b, "ゾンビと仲良くなりたい" %></td>
+      </tr>
+
+      <th><strong>４.ゾンビとの接し方は？</strong></th>
+      <tr>
+        <td><%= f.radio_button :q_4, "a", checked: true %><%= f.label :q_4_a, "サクッと" %></td>
+        <td><%= f.radio_button :q_4, "b" %><%= f.label :q_4_b, "長期的に" %></td>
+      </tr>
+    </table>
+
+      <div class="d-flex justify-content-center align-items-center mt-3">
+        <%= f.submit "診断結果へ", class:"btn btn-sm btn-outline-info" %>
+      </div>
+
+    <% end %>
   </div>
-  
-  <div>
-    <p>ゾンビと何したい？</p>
-    <%= f.radio_button :q_3, "a" %><%= f.label :q_3_a, "ゾンビと戦いたい" %>
-    <%= f.radio_button :q_3, "b" %><%= f.label :q_3_b, "ゾンビと仲良くなりたい" %>
-  </div>
-  
-  <div>
-    <p>ゾンビとの接し方は？</p>
-    <%= f.radio_button :q_4, "a" %><%= f.label :q_4_a, "サクッと" %>
-    <%= f.radio_button :q_4, "b" %><%= f.label :q_4_b, "長期的に" %>
-  </div>
-  
-  
-<%= f.submit "診断結果へ" %>
-<% end %>
+</div>

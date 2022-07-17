@@ -1,12 +1,37 @@
-<h1>アナタにおすすめのゾンビコンテンツ</h1>
 
-<% @zombies.each do |zombie| %>
-  <%= zombie.name %><br>
-  <%= attachment_image_tag zombie, :image, :fill, 200, 200, format: 'jpeg' %>
-  <%= zombie.body %>
-      <% zombie.tags.each do |tag| %>
-          <%= tag.name %>
-      <% end %><br>
-<% end %>
+<div class="container">
+  <div class="row d-flex justify-content-center align-items-center" style="height: 100px;">
+    <h1>アナタにおすすめのゾンビ</h1>
+  </div>
 
+  <div class="row d-flex justify-content-center align-items-center">
+    <div class="col-md-8">
+      <table class="table table-sm">
+        <thead>
+          <tr>
+            <th style="width: 25%"></th>
+            <th style="width: 25%">タイトル</th>
+            <th style="width: 50%">概　要</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @zombies.each do |zombie| %>
+            <tr>
+              <td><%= attachment_image_tag zombie, :image, :fill, 100, 100, format: 'jpeg' %><br>
+                  <span>お気に入り数(<%= zombie.favorites.length %>)</span></td>
+              <td><%= link_to zombie.name, zombie_path(zombie), class:"text-dark" %></td>
+              <td><%= zombie.body %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+  <div class="row d-flex justify-content-center align-items-center">
+    <%= link_to "TOPへ戻る", root_path, class:"btn btn-sm btn-outline-info mr-4" %>
+    <%= link_to "一覧をみる", zombies_path, class:"btn btn-sm btn-outline-info" %>
+  </div>
+</div>
 

@@ -3,7 +3,7 @@ class ReviewsController < ApplicationController
 
   def create
     @zombie = Zombie.find(params[:zombie_id])
-    @review = @zombie.reviews.new(user_id: current_user.id, body: params[:review][:body])
+    @review = @zombie.reviews.new(user_id: current_user.id, body: params[:body])
     if @review.save
       redirect_to request.referer
     else

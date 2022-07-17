@@ -16,7 +16,6 @@ class ZombiesController < ApplicationController
 
   def show
     @zombie = Zombie.find(params[:id])
-    @review = Review.where(zombie_id: @zombie.id).where(user_id: current_user.id)
     @reviews = Review.where(zombie_id: @zombie)
   end
 
@@ -31,6 +30,7 @@ class ZombiesController < ApplicationController
   end
 
   def search
+    @tags = Tag.all
     @keyword = params[:keyword]
     zombie_1 = Zombie.where(["name like? OR body like?", "%#{@keyword}%", "%#{@keyword}%"])
       s1 = zombie_1.ids.uniq #検索で取得したゾンビdiを取得
@@ -48,7 +48,8 @@ class ZombiesController < ApplicationController
 
   def index
     @tags = Tag.all
-    if params[:tag_name].present?
+    if params[:tag_name].present? || @keyword.present?
+      @tag = params[:tag_name]
       @zombies = Zombie.includes(:tags).where(tags: {name: params[:tag_name]})
     else
       @zombies = Zombie.all

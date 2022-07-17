@@ -6,10 +6,16 @@
       <% end %>
     </div>
   </div>
-  
+
 
   <div class="row d-flex justify-content-center align-items-center" style="height: 100px;">
-    <h1>ゾンビ一覧</h1>
+    <% if params[:tag_name].present?  %>
+      <h1>ゾンビ一覧(#<%= @tag %>)</h1>
+    <% elsif @keyword.present? %>
+      <h1>"<%= @keyword %>"検索結果一覧</h1>
+    <% else %>
+      <h1>ゾンビ一覧</h1>
+    <% end %>
   </div>
 
   <div class="row d-flex justify-content-center align-items-center">
