@@ -32,7 +32,7 @@
         <tbody>
           <% @zombies.each do |zombie| %>
             <tr>
-              <td><%= attachment_image_tag zombie, :image, :fill, 100, 100, format: 'jpeg' %><br>
+              <td><%= attachment_image_tag zombie, :image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %><br>
                   <span>お気に入り数(<%= zombie.favorites.length %>)</span></td>
               <td><%= link_to zombie.name, zombie_path(zombie), class:"text-dark" %></td>
               <td><%= zombie.body %></td>
