@@ -15,6 +15,7 @@
 思えるようなサイトを目指しています。
 
 ## 設計書
+- db/seeds.rbに初期データを記載
 - ER図
 <https://app.diagrams.net/#G1MO1UjnSEVRSSWG6SfXNNH_n2nie-QVSa>
 - テーブル定義書
