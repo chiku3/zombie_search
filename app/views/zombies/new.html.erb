@@ -9,7 +9,7 @@
       
       <div class="d-flex flex-column justify-content-center align-items-center text-danger">
         <% if @zombie.errors.any? %>
-          <strong><%= @zombie.errors.count %>個のエラーがあります。</strong>
+          <strong><%= @zombie.errors.count %>個のエラーがあります。 </strong>
             <ul>
               <% @zombie.errors.full_messages.each do |msg| %>
                 <li><%= msg %></li>
